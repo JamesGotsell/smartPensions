@@ -10,5 +10,4 @@ export const GET_PERSON = gql`
     }
   }
 }
-
 `;

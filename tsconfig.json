@@ -13,7 +13,7 @@
   "include": [
     "./src/**/*.ts*",
     "webpack.*.ts"
-  ],
+, "setupEzyme.ts"  ],
   "exclude": [
     "node_modules"
   ],
