@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "pretty": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "noEmit": true
+  },
+  "include": [
+    "./src/**/*.ts*",
+    "webpack.*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "paths": {
+    "components/*": ["src/components/*"]
+  }
+}
