@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const GET_PERSON = gql`
+export const GET_ALL_PEOPLE = gql`
  query getIds {
   allPeople{
   	edges{

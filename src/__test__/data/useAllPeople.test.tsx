@@ -1,7 +1,7 @@
 import React from "react"
 import { mount } from 'enzyme'
 import { MockedProvider } from "@apollo/client/testing";
-import { GET_ALL_PEOPLE } from '../../graphql/queries/getAllPeople'
+import { GET_ALL_PEOPLE  } from '../../graphql/queries/getAllPeople'
 
 const TestComponent = () => ( <div> boom</div>)
 describe(' test query', () => {
