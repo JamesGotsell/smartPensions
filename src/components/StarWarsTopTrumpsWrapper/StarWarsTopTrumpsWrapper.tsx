@@ -1,22 +1,29 @@
 import React from "react";
-import usePersonQuery from "../../data/usePersonQuery";
-import useAllStarShipQuery from "../../data/useAllStarShipQuery";
+
+interface Person {
+
+}
+interface StarShip {
+
+}
+
+interface TopTrumpsData {
+  person?: Person[]
+  starShip?: StarShip[]
+}
 
 
-export const StarWarsTopTrumpsWrapper: React.FC = (): React.ReactElement => {
-  const [data, error, isLoading] = usePersonQuery();
+export const StarWarsTopTrumpsWrapper: React.FC<TopTrumpsData> = () => {
 
-  const [StarShipIDs, errorStarShipIDs, isLoadingStarShipIDs] = useAllStarShipQuery();
 
-  if (isLoading && isLoadingStarShipIDs) {
-    return <div>loading</div>;
-  }
+  // if (isLoading && isLoadingStarShipIDs) {
+  //   return <div>loading</div>;
+  // }
 
-  if (error && errorStarShipIDs) {
-    return <div>Could not load your feed. Try again</div>;
-  }
-  console.log(data, "person ids")
-  console.log(StarShipIDs, "person ids")
+  // if (error && errorStarShipIDs) {
+  //   return <div>Could not load your feed. Try again</div>;
+  // }
+
   return (
     <div>
       <div>StarWarsTopTrumpsWrapper</div>

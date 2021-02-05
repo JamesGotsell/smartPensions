@@ -5,7 +5,7 @@ import { render } from "react-dom";
 import { App } from "./components/App/App";
 
 const client = new ApolloClient({
-  uri: "http://localhost:56068/"
+  uri: "http://localhost:58851/"
 });
 
 render(
