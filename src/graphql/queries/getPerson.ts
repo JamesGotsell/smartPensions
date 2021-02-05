@@ -1,14 +1,13 @@
 
 import gql from "graphql-tag";
 
-export const GET_All_STAR_SHIPS = gql`
-query getStarShipIds {
-  allStarships {
-    edges{
-      node{
-        id 
-      }
-    }
+export const GET_PERSON = gql`
+query getPerson($id: ID) {
+  person(id: $id) {
+    name
+    height
+    birthYear
+    gender
   }
 }
 `;
