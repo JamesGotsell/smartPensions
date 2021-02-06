@@ -3,17 +3,19 @@ import { ApolloError } from "apollo-client";
 
 import { GET_STAR_SHIP } from '../graphql/queries/getStarShip'
 
+interface starship {
+  id: number,
+  model: string,
+  passengers: string,
+  costInCredits: number,
+  starshipClass: string,
+  maxAtmospheringSpeed: number,
+  hyperdriveRating: number
 
+}
 interface StarShipData {
-  starship: {
-    id: number,
-    model: string,
-    passengers: string,
-    costInCredits: number,
-    starshipClass: string,
-    maxAtmospheringSpeed: number,
-    hyperdriveRating: number
-  }
+  firstSelection?: starship
+  secondSelection?: starship
 }
 export default (id: string, id2: string): [StarShipData, ApolloError, boolean] => {
   const { data, error, loading: isLoading } = useQuery(GET_STAR_SHIP, {

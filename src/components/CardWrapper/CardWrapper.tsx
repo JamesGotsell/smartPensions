@@ -1,15 +1,18 @@
 import React from "react";
 
+interface starship {
+  id: number,
+  model: string,
+  passengers: string,
+  costInCredits: number,
+  starshipClass: string,
+  maxAtmospheringSpeed: number,
+  hyperdriveRating: number
+
+}
 interface StarShipData {
-  starship: {
-    id: number,
-    model: string,
-    passengers: string,
-    costInCredits: number,
-    starshipClass: string,
-    maxAtmospheringSpeed: number,
-    hyperdriveRating: number
-  }
+  firstSelection?: starship
+  secondSelection?: starship
 }
 interface Person {
   name: string
@@ -18,11 +21,15 @@ interface Person {
   gender: string
 }
 
+interface Charactors {
+  firstSelection?: Person
+  secondSelection?: Person
+}
 
 interface CardWrapperProps {
   characterGame: boolean;
-  firstSelection?: StarShipData | Person
-  secondSelection?: StarShipData | Person
+  firstSelection?: StarShipData | Charactors
+  secondSelection?: StarShipData | Charactors
 }
 // need to extract data  and di
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {

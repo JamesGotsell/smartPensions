@@ -4,6 +4,7 @@ import { ApolloError } from "apollo-client";
 import { GET_PERSON } from '../graphql/queries/getPerson'
 
 
+
 interface Person {
   name: string
   height: number,
@@ -11,8 +12,13 @@ interface Person {
   gender: string
 }
 
+interface Charactors {
+  firstSelection?: Person
+  secondSelection?: Person
+}
 
-export default (id: string, id2: string): [Person, ApolloError, boolean] => {
+
+export default (id: string, id2: string): [Charactors, ApolloError, boolean] => {
   const { data, error, loading: isLoading } = useQuery(GET_PERSON, {
     variables: {
       id: id,
