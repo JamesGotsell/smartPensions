@@ -14,9 +14,6 @@ interface AllData {
   gender?: string
 }
 
-
-
-
 interface CardWrapperProps {
   characterGame: boolean;
   firstSelection:  AllData
@@ -27,10 +24,18 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
   const [winner, setWinner] = useState("")
 
   const getWinner = () => {
-    if(characterGame && firstSelection && secondSelection ) {
+    if(characterGame) {
       const winner = (firstSelection.height > secondSelection.height) ? "player 1" : "computer"
       setWinner(winner)
-    }else  {
+    }else if(characterGame && (firstSelection.height === secondSelection.height)) {
+        const winner = "draw"
+        setWinner(winner)
+    }
+    else if (!characterGame && (firstSelection.hyperdriveRating === secondSelection.hyperdriveRating)) {
+      const winner = "draw"
+      setWinner(winner)
+    }
+    else if(!characterGame)  {
       const winner = (firstSelection.hyperdriveRating > secondSelection.hyperdriveRating) ? "player 1" : "computer"
       setWinner(winner)
     }
@@ -38,9 +43,7 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
   }
   return (
     <div>
-
        <Card firstSelection={firstSelection} secondSelection={secondSelection} /> 
-       
        <button  onClick={getWinner}> <h3>whos the winner</h3></button>
        { winner && <p>{winner}</p>}
     </div> 
