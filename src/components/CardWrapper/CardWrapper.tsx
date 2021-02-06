@@ -1,44 +1,48 @@
-import React from "react";
-
-interface starship {
-  id: number,
-  model: string,
-  passengers: string,
-  costInCredits: number,
-  starshipClass: string,
-  maxAtmospheringSpeed: number,
-  hyperdriveRating: number
-
-}
-interface StarShipData {
-  firstSelection?: starship
-  secondSelection?: starship
-}
-interface Person {
-  name: string
-  height: number,
-  birthYear: string,
-  gender: string
+import React, {useState} from "react";
+import { Card } from '../Card/Card'
+interface AllData {
+  id?: number,
+  model?: string,
+  passengers?: string,
+  costInCredits?: number,
+  starshipClass?: string,
+  maxAtmospheringSpeed?: number,
+  hyperdriveRating?: number
+  name?: string
+  height?: number,
+  birthYear?: string,
+  gender?: string
 }
 
-interface Charactors {
-  firstSelection?: Person
-  secondSelection?: Person
-}
+
+
 
 interface CardWrapperProps {
   characterGame: boolean;
-  firstSelection?: StarShipData | Charactors
-  secondSelection?: StarShipData | Charactors
+  firstSelection:  AllData
+  secondSelection:  AllData
 }
-// need to extract data  and di
+
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {
-     // can move this in to the top trumps component
-  console.log(characterGame, firstSelection, secondSelection)
+  const [winner, setWinner] = useState("")
+
+  const getWinner = () => {
+    if(characterGame && firstSelection && secondSelection ) {
+      const winner = (firstSelection.height > secondSelection.height) ? "player 1" : "computer"
+      setWinner(winner)
+    }else  {
+      const winner = (firstSelection.hyperdriveRating > secondSelection.hyperdriveRating) ? "player 1" : "computer"
+      setWinner(winner)
+    }
+    
+  }
   return (
     <div>
-      <div>CardWrapper</div>
 
-    </div>
+       <Card firstSelection={firstSelection} secondSelection={secondSelection} /> 
+       
+       <button  onClick={getWinner}> <h3>whos the winner</h3></button>
+       { winner && <p>{winner}</p>}
+    </div> 
   );
 };

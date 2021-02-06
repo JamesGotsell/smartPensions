@@ -1,6 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/react-hooks"
 import { StarWarsTopTrumpsWrapper } from "../StarWarsTopTrumpsWrapper/StarWarsTopTrumpsWrapper";
 import useAllPeopleQuery from "../../data/useAllPeopleQuery";
+
 import useAllStarShipQuery from "../../data/useAllStarShipQuery";
 import { getRamdomValue } from '../../lib/utils'
 
@@ -29,7 +31,7 @@ export const App: React.FunctionComponent = () => {
     })
 
     const [toggleValue, setTogglValue] = useState({
-        buttonTitle: "change data",
+        buttonTitle: "Choose game ",
         toggle: false
     });
  
@@ -51,10 +53,6 @@ export const App: React.FunctionComponent = () => {
     `
 
     const getRandomItem = (array: string[]):  gameData  => {
-        // take the array of ids 
-        // call the  getRamdomValue function 
-        // set gameData object 
-        // return gateDAta object
         const data: gameData = {
             player1Selection: getRamdomValue(array),
             computerSelection: getRamdomValue(array),
@@ -66,23 +64,24 @@ export const App: React.FunctionComponent = () => {
        return array.map((item) => {return item.node.id})
     }
 
-   
-   const changeGameData = () => {
-    setTogglValue({
-        buttonTitle: toggleValue.toggle ? "Char game": "Ship game",
-        toggle: !toggleValue.toggle
-    })
-    if(toggleValue.toggle){
-       const stuff = getRandomItem(peoplesIds)
-       setGameData(stuff)
-    }else {
-        const stuff = getRandomItem(shipIds)
+
+   const playGame = () => {
+       // need to update the data 
+       // update the computer and player selection 
+
+       if(toggleValue.toggle){
+           debugger
+        const stuff = getRandomItem(peoplesIds)
         setGameData(stuff)
-    }
-    
+     }else {
+         const stuff = getRandomItem(shipIds)
+         setGameData(stuff)
+     }
    }
+   
 
    useEffect(() => {
+        console.log(data?.allPeople.edges, StarShipIDs?.allStarships.edges)
         if(!isLoading) {
             const charId = extractData(data?.allPeople.edges)
             setPeopleId(charId)
@@ -99,15 +98,22 @@ return (
         {/* i need a button that chooses between either person or starship -done */}
         {/* need merge all ids in to array then chose a random ids from the array - done*/} 
         {/* need a computer selection and player 1 */} 
-        {/* compare values - compare winner win for obj 1 or 2 or drwa  */}
+        {/* compare values - compare winner win for obj 1 or 2 or drwa   */}
         {/* add results to local state - wi */}
         {/* using react router to route to results page */}
         {/* get the  results from local state then display*/}
         <Wrapper>
         <Title>STARWARS TOP TRUMPS</Title>
-        <Button onClick={changeGameData}>{toggleValue.buttonTitle}</Button>
+        <Button onClick={() => setTogglValue({
+                buttonTitle: "change game",
+                toggle: !toggleValue.toggle
+            })}>
+            {toggleValue.buttonTitle}
+        </Button>
+        <Button onClick={playGame}>Play</Button>
             <StarWarsTopTrumpsWrapper 
-                characterGame={gameData?.characterGame || false} 
+                gameTitle={toggleValue.toggle ? "Character game" : "Ship game"}
+                characterGame={gameData?.characterGame} 
                 player1Selection={gameData.player1Selection || ""} 
                 computerSelection={gameData.computerSelection || ''} />
         </Wrapper>
