@@ -66,11 +66,7 @@ export const App: React.FunctionComponent = () => {
 
 
    const playGame = () => {
-       // need to update the data 
-       // update the computer and player selection 
-
        if(toggleValue.toggle){
-           debugger
         const stuff = getRandomItem(peoplesIds)
         setGameData(stuff)
      }else {
