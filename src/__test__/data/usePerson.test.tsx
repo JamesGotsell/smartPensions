@@ -10,17 +10,16 @@ describe(' test query', () => {
     request: {
       query: GET_PERSON,
       variables: {
-        id: "c3RhcnNoaXBzOjk="
+        id: "c3RhcnNoaXBzOjk=",
+        id2: "c3RhcnNoaXBzOjk="
       },
     },
     result: {
-      edges: {
-        node: { id: "cGVvcGxlOjE=", __typename: "Person" },
-        __typename: "Person"
-
-      }
-    }
-  },
+      edges: [
+        { id: "cGVvcGxlOjE=", __typename: "Person" },
+        { id: "cGVvcGxlOjE=", __typename: "Person" },
+      ]}
+    },
   ];
   it('renders without error', async () => {
 

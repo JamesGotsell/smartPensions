@@ -10,7 +10,8 @@ describe(' test query', () => {
     request: {
       query: GET_STAR_SHIP,
       variables: {
-        id: "c3RhcnNoaXBzOjk="
+        id: "c3RhcnNoaXBzOjk=",
+        id2: "c3RhcnNoaXBzOjk="
       },
     },
     result: {

@@ -30,7 +30,8 @@ const config: Configuration & webpackDevServer.Configuration = {
         enforce: "pre"
       }
     ]
-  }
+  },
+  devtool: "#inline-source-map",
 };
 
 export default config;

@@ -12,11 +12,13 @@ interface Person {
 }
 
 
-export default (id: string): [Person, ApolloError, boolean] => {
+export default (id: string, id2: string): [Person, ApolloError, boolean] => {
   const { data, error, loading: isLoading } = useQuery(GET_PERSON, {
     variables: {
-      id: id
-    }
+      id: id,
+      id2: id2
+    },
+    skip: (id == "" || id2 == "")
   });
   return [data, error, isLoading];
 };
