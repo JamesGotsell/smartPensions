@@ -32,41 +32,47 @@ interface GameData {
 
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {
   const [winner, setWinner] = useState("")
-  const [gameCount , setGameCount] = useState(0)
+  let [gameCount , setGameCount] = useState(0)
   const [localResult, setLocalResult ] = useState({
-    wonBy: "",
-    gameNumber: 0,
-    __typename: "Result"
+    wonBy: '',
+    gameNumbe: 0
   })
   const { loading, error, data } = useQuery(GET_RESULTS);
   const [addResult] = useMutation(ADD_RESULT);
   console.log(loading, error, data )
   // const client = useApolloClient();
-  const getWinner = () => {
-  
-    if(characterGame) {
-      const winner = (firstSelection.height > secondSelection.height) ? "player 1" : "computer"
-      setWinner(winner)
-    }else if(characterGame && (firstSelection.height === secondSelection.height)) {
-        const winner = "draw"
-        setWinner(winner)
-    }
-    else if (!characterGame && (firstSelection.hyperdriveRating === secondSelection.hyperdriveRating)) {
-      const winner = "draw"
-      setWinner(winner)
-    }
-    else if(!characterGame)  {
-      const winner = (firstSelection.hyperdriveRating > secondSelection.hyperdriveRating) ? "player 1" : "computer"
-      setWinner(winner)
-    }
+
+  const updateResultsObj = (winner:string): void => {
+    setWinner(winner)
     setGameCount(gameCount+1)
     const localResultsObject = {
-      gameNumber: gameCount ,
+      gameNumber: gameCount,
       wonBy: winner,
       __typename: "Result"
 
     }
     setLocalResult(localResultsObject)
+  }
+  const getWinner = (): void => {
+  
+    if(characterGame) {
+      const winner = (firstSelection.height > secondSelection.height) ? "player 1" : "computer"
+
+      updateResultsObj(winner)
+    }else if(characterGame && (firstSelection.height === secondSelection.height)) {
+        const winner = "draw"
+        updateResultsObj(winner)
+        
+    }
+    else if (!characterGame && (firstSelection.hyperdriveRating === secondSelection.hyperdriveRating)) {
+      const winner = "draw"
+      updateResultsObj(winner)
+    }
+    else if(!characterGame)  {
+      const winner = (firstSelection.hyperdriveRating > secondSelection.hyperdriveRating) ? "player 1" : "computer"
+      updateResultsObj(winner)
+    }
+  
   }
 
   console.log(localResult)
@@ -74,7 +80,7 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
     <div>
         <Card firstSelection={firstSelection} secondSelection={secondSelection} />
         <button onClick={getWinner}> <h3>whos the winner</h3></button>
-        { winner && <p>{winner}</p>}) 
+        { winner && <p>{winner}</p>} 
         {/* <button onClick={() =>  client.writeData({ data: { localResult, __typename: "Results"}})}>stuff</button> */}
         <button
         disabled={!winner}

@@ -11,10 +11,11 @@ import {
 export const Results: React.FC  = () => (
        <Query query={GET_RESULTS}>
        {({ loading, data }) => {
+         console.log(data)
          if (loading) {
            return <h1>loading...</h1>
          }
-         return <div>{data}</div>
+         return <div>boom</div>
        }}
      </Query>
   

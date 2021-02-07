@@ -65,7 +65,7 @@ export const client = new ApolloClient({
   cache: cache,
   resolvers: resolvers,
 
-  uri: "http://localhost:49319"
+  uri: " http://localhost:49319"
 });
 
 client.writeData({
