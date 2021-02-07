@@ -6,18 +6,12 @@ export const resolvers = {
       // const localData = cache.readQuery({
       //   query: GET_RESULTS
       // })
-
-
       let new_result = {
         wonBy: result.wonBy,
         gameNumber: result.gameNumber,
         __typename: result.__typename
       };
-   
-
-
       let updatedResult = [new_result];
-      
       console.log(updatedResult)
       cache.writeData({
         query: ADD_RESULT,
