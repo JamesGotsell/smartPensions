@@ -37,7 +37,6 @@ export const App: React.FunctionComponent = () => {
 
 return (
     <>  
-        {/* get the  results from local state then display*/}
         <Wrapper>
               
                 <Title>STARWARS TOP TRUMPS</Title>
