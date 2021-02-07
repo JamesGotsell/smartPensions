@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { GET_RESULTS } from '../../graphql/queries/getResults'
-
-
-import {
-  Query
-} from "react-apollo"
+import  useResultsQuery  from '../../data/useResultsQuery'
 
 
-export const Results: React.FC  = () => (
-       <Query query={GET_RESULTS}>
-       {({ loading, data }) => {
-         console.log(data)
-         if (loading) {
-           return <h1>loading...</h1>
-         }
-         if(!data) {
-          return <div>No results</div>
-         }
-         return <div>boom</div>
-       }}
-     </Query>
-  
-)
+export const Results: React.FC  = () => {
+    const [results, resultsError, isLoadingResults ] = useResultsQuery()
+
+
+    console.log(results, resultsError, isLoadingResults )
+    const renderResults = () => {
+      return <p>{results.results.map((item) => {return <p> the last game {item.wonBy != "draw" ? ` was wonBy ${item.wonBy}` : `was a draw` }</p>})}</p>
+    }
+
+    useEffect(() =>{
+
+    },[results])
+    return (
+      <>
+       {renderResults()}
+      </>
+     
+    )
+
+}
