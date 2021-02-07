@@ -3,7 +3,7 @@ import { Card } from '../Card/Card'
 
 // import { ApolloConsumer } from "react-apollo";
 import { useMutation , useQuery } from "@apollo/react-hooks";
-import { GET_RESULTS, ADD_RESULT } from "../../graphql/queries/getResults";
+import { ADD_RESULT } from "../../graphql/queries/getResults";
 
 interface AllData {
   id?: number,
@@ -28,24 +28,23 @@ interface CardWrapperProps {
 interface GameData {
   gameNumber: number;
   wonBy: string; // either computer or  player one
+  __typename?: string
 }
 
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {
   const [winner, setWinner] = useState("")
   let [gameCount , setGameCount] = useState(0)
-  const [localResult, setLocalResult ] = useState({
+  const [localResult, setLocalResult ] = useState<GameData>({
     wonBy: '',
-    gameNumbe: 0
+    gameNumber: 0
   })
-  const { loading, error, data } = useQuery(GET_RESULTS);
+  
   const [addResult] = useMutation(ADD_RESULT);
-  console.log(loading, error, data )
-  // const client = useApolloClient();
 
   const updateResultsObj = (winner:string): void => {
     setWinner(winner)
     setGameCount(gameCount+1)
-    const localResultsObject = {
+    const localResultsObject:GameData = {
       gameNumber: gameCount,
       wonBy: winner,
       __typename: "Result"
@@ -75,7 +74,6 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
   
   }
 
-  console.log(localResult)
   return (
     <div>
         <Card firstSelection={firstSelection} secondSelection={secondSelection} />
@@ -85,10 +83,11 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
         <button
         disabled={!winner}
         onClick={() => {
+          console.log(localResult, "local result")
           addResult({
             variables: {
-              wonBy: localResult.wonBy,
-              gameNumber: localResult.gameNumber,
+              wonBy: localResult.wonBy ,
+              gameNumber: localResult.gameNumber ,
               __typename: "Result"
             },
           });

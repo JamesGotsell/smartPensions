@@ -15,6 +15,9 @@ export const Results: React.FC  = () => (
          if (loading) {
            return <h1>loading...</h1>
          }
+         if(!data) {
+          return <div>No results</div>
+         }
          return <div>boom</div>
        }}
      </Query>

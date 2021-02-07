@@ -21,34 +21,35 @@ export const resolvers = {
   Mutation: {
     addResult: (_, result, { cache }) => {
       // debugger
-      const localData = cache.readQuery({
-        query: GET_RESULTS 
-      })
-      console.log(localData)
-      // const queryData = cache.readQuery({query: ADD_RESULT, variables: {wonBy: "", gameNumber: 0 , __typename: "Result" }})
-      // console.log( queryData)
+      debugger
+      // const localData = cache.readQuery({
+      //   query: GET_RESULTS
+      // })
+      // const prevResult = localData.results
+      debugger
+
       let new_result = {
         wonBy: result.wonBy,
         gameNumber: result.gameNumber,
         __typename: result.__typename
       };
 
-      // const results = cache.readQuery({  query:  GET_RESULTS, variables: {wonBy: "", gameNumber: 0 , __typename: "Result" } })
-      // const { results } = cache.readQuery({ query:  GET_RESULTS, variables: { wonBy: "", gameNumber: 0 },  __typename: "result" });
-      
-      const stuff = [localData.results, new_result]
+      let updatedResult = [new_result]
 
+      // let updatedResult = prevResult.push(new_result)
+      console.log(updatedResult)
       cache.writeData({
         query: ADD_RESULT,
         data: {
-          results: stuff,
+          results: updatedResult ,
           __typename: "Result"
         },
         variables: {
-          wonBy: result.wonBy,
-           gameNumber: result.gameNumber,
-          __typename: result.__typename
-        
+          result: {
+            wonBy: result.wonBy,
+            gameNumber: result.gameNumber,
+           __typename: result.__typename
+          }
         }
       });
 
@@ -64,8 +65,8 @@ persistCache({
 export const client = new ApolloClient({
   cache: cache,
   resolvers: resolvers,
-
-  uri: " http://localhost:49319"
+  uri: " http://localhost:49319",
+  
 });
 
 client.writeData({
