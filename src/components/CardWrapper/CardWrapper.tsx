@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Card } from '../Card/Card'
 
-import { ApolloConsumer } from "react-apollo";
-import gql from "graphql-tag";
+// import { ApolloConsumer } from "react-apollo";
+import { useMutation , useQuery } from "@apollo/react-hooks";
+import { GET_RESULTS, ADD_RESULT } from "../../graphql/queries/getResults";
 
 interface AllData {
   id?: number,
@@ -32,7 +33,15 @@ interface GameData {
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {
   const [winner, setWinner] = useState("")
   const [gameCount , setGameCount] = useState(0)
-  const [localResult, setLocalResult ] = useState({})
+  const [localResult, setLocalResult ] = useState({
+    wonBy: "",
+    gameNumber: 0,
+    __typename: "Result"
+  })
+  const { loading, error, data } = useQuery(GET_RESULTS);
+  const [addResult] = useMutation(ADD_RESULT);
+  console.log(loading, error, data )
+  // const client = useApolloClient();
   const getWinner = () => {
   
     if(characterGame) {
@@ -53,49 +62,32 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
     setGameCount(gameCount+1)
     const localResultsObject = {
       gameNumber: gameCount ,
-      wonBy: winner
-    }
+      wonBy: winner,
+      __typename: "Result"
 
+    }
     setLocalResult(localResultsObject)
-    
   }
 
-  const query = gql`
-    query GetResults {
-      gameResults @client
-    }
-`;
-  const updateItem = () => {
-    // console.log(resultOBj)
-    // const data = client.readQuery({ query });
-    // console.log( data)
-    return (
-      <ApolloConsumer>
-        {cache => (
-          <div>
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-                let { items } = cache.readQuery({ query });
-                debugger
-                items = [...items,  localResult];
-                cache.writeQuery(items)
-              }}
-            >
-              <button type="submit">Add Item</button>
-            </form>
-          </div>
-        )}
-      </ApolloConsumer>
-    );
-  }
+  console.log(localResult)
   return (
     <div>
         <Card firstSelection={firstSelection} secondSelection={secondSelection} />
-            <button onClick={getWinner}> <h3>whos the winner</h3></button>
-       { winner && <p>{winner}</p>})
-       {updateItem()}
-       
+        <button onClick={getWinner}> <h3>whos the winner</h3></button>
+        { winner && <p>{winner}</p>}) 
+        {/* <button onClick={() =>  client.writeData({ data: { localResult, __typename: "Results"}})}>stuff</button> */}
+        <button
+        disabled={!winner}
+        onClick={() => {
+          addResult({
+            variables: {
+              wonBy: localResult.wonBy,
+              gameNumber: localResult.gameNumber,
+              __typename: "Result"
+            },
+          });
+        }}
+      > add winner </button>
     </div> 
   );
 };

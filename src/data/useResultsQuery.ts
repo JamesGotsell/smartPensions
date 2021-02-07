@@ -6,11 +6,10 @@ import { GET_RESULTS } from '../graphql/queries/getResults'
 interface GameData {
   gameNumber: number;
   wonBy: string; // either computer or  player one
+  __typename: string
 }
 interface Results {
-  data: {
-    gameResults: GameData[]
-  }
+  results: GameData[]
 }
 
 export default (): [Results, ApolloError, boolean] => {
