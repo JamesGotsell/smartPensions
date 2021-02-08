@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
-import useAllPeopleQuery from "../../data/useAllPeopleQuery";
-
-import useAllStarShipQuery from "../../data/useAllStarShipQuery";
-import { getRamdomValue } from '../../lib/utils'
+import React  from "react";
 
 import styled from "styled-components"
-import {Nav} from '../Nav/Nav'
-import {Home} from '../Pages/Home'
-import {ResultsPage} from '../Pages/ResultsPage'
+import { Nav } from '../Nav/Nav'
+import { Home } from '../Pages/Home'
+import { ResultsPage } from '../Pages/ResultsPage'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
   } from "react-router-dom";
 
-interface gameData {
-    player1Selection: string;
-    computerSelection: string;
-    characterGame: boolean;
-}
+
 export const App: React.FunctionComponent = () => {
     const Wrapper = styled.section`
             padding: 4em;

@@ -3,13 +3,17 @@ import { ApolloError } from "apollo-client";
 
 import { GET_RESULTS } from '../graphql/queries/getResults'
 
+import { AllData } from '../../src/components/types/types'
+
+
 interface GameData {
   gameNumber: number;
-  wonBy: string; // either computer or  player one
+  wonBy: string;
+  winningObject: AllData;
   __typename: string
 }
 interface Results {
-  results: GameData[]
+  results: GameData
 }
 
 export default (): [Results, ApolloError, boolean] => {

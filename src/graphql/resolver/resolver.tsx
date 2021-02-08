@@ -1,5 +1,5 @@
 
-import { ADD_RESULT, GET_RESULTS } from '../queries/getResults'
+import { ADD_RESULT } from '../queries/getResults'
 export const resolvers = {
   Mutation: {
     addResult: (_, result, { cache }) => {
@@ -12,7 +12,6 @@ export const resolvers = {
         __typename: result.__typename
       };
       let updatedResult = [new_result];
-      console.log(updatedResult)
       cache.writeData({
         query: ADD_RESULT,
         data: {

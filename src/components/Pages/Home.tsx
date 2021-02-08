@@ -35,8 +35,6 @@ export const Home: React.FunctionComponent = () => {
         toggle: false
     });
  
-
-
     const Title = styled.h1`
         font-size: 1.5em;
         text-align: center;
@@ -87,13 +85,7 @@ export const Home: React.FunctionComponent = () => {
 
 return (
     <>  
-        {/* i need a button that chooses between either person or starship -done */}
-        {/* need merge all ids in to array then chose a random ids from the array - done*/} 
-        {/* need a computer selection and player 1 */} 
-        {/* compare values - compare winner win for obj 1 or 2 or drwa   */}
-        {/* add results to local state - wi */}
-        {/* using react router to route to results page */}
-        {/* get the  results from local state then display*/}
+
         <Button onClick={() => setTogglValue({
                 buttonTitle: "change game",
                 toggle: !toggleValue.toggle

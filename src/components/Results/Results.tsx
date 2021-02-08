@@ -1,21 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import ReactCardFlip from "react-card-flip"
+import { GameData } from '../types/types'
+interface ResultsProps {
+  data: GameData
+  isFlipped: boolean
+}
 
-import  useResultsQuery  from '../../data/useResultsQuery'
+export const Results: React.FC<ResultsProps>  = ({data,isFlipped}) => {
+    
 
+    const ResultCard = ({data}) => {
 
-export const Results: React.FC  = () => {
-    const [results, resultsError, isLoadingResults ] = useResultsQuery()
-    console.log(results, resultsError, isLoadingResults )
-    const renderResults = () => {
-      return <p>{results.results.map((item, i) => {return <p key={i}> the last game {item.wonBy != "draw" ? ` was wonBy ${item.wonBy}` : `was a draw` }</p>})}</p>
+        return (
+          <div>
+            <img height={200} width={200} src='https://www.placecage.com/g/200/300' />
+            <p>{data.map((item, i) => {return <p key={i}> the last game {item.wonBy != "draw" ? ` was wonBy ${item.wonBy}` : `was a draw` }</p>})}</p>
+          </div>
+        )
     }
 
-    useEffect(() =>{
-
-    },[results])
     return (
       <>
-       {renderResults()}
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+          <img height={200} width={200} src='https://www.placecage.com/g/300/300' />
+          <ResultCard data={data}  />
+        </ReactCardFlip>
+        
       </>
      
     )

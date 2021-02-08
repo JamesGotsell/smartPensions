@@ -1,17 +1,7 @@
 import React from "react"
+import { AllData } from '../types/types'
+import styled from "styled-components"
 
-
-interface AllData {
-  id?: number,
-  model?: string,
-  hyperdriveRating?: number
-  name?: string
-  height?: number,
-  birthYear?: string,
-  gender?: string
-}
-
- 
 interface CardProps {
     firstSelection?: AllData
     secondSelection?: AllData
@@ -26,6 +16,7 @@ export const Card: React.FC<CardProps> = ({firstSelection, secondSelection}) => 
     birthYear,
     gender,
   } = firstSelection
+
   const {
     model: secondSelectionModel,
     hyperdriveRating: secondSelectionHyperdriveRating,
@@ -52,15 +43,15 @@ export const Card: React.FC<CardProps> = ({firstSelection, secondSelection}) => 
   const Card = ({title, hyperdriveRating, height, name,  model, gender }) => {
     
     return (
-    <div>
-    <h2>{title}</h2>
-  
-      <p>{parseData(height || hyperdriveRating)}</p>
-      <p>{parseData(name || model)} </p>
-      <p>{birthYear ? parseData(birthYear) : null}</p>
-      <p>{gender ? parseData(gender) : null}</p>
-    </div>
-    )
+    <>
+        <h2>{title}</h2>
+      
+          <p>{parseData(height || hyperdriveRating)}</p>
+          <p>{parseData(name || model)} </p>
+          <p>{birthYear ? parseData(birthYear) : null}</p>
+          <p>{gender ? parseData(gender) : null}</p>
+        </>
+      )
   }
 return (
   <>
