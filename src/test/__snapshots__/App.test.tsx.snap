@@ -2,6 +2,25 @@
 
 exports[`renders the component 1`] = `
 <Fragment>
-  <Component />
+  <styled.section>
+    <Memo(l) />
+    <styled.h1>
+      STARWARS TOP TRUMPS
+    </styled.h1>
+    <BrowserRouter>
+      <Component />
+      <Switch>
+        <Route
+          component={[Function]}
+          path="/results"
+        />
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/"
+        />
+      </Switch>
+    </BrowserRouter>
+  </styled.section>
 </Fragment>
 `;
