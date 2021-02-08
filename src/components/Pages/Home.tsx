@@ -13,6 +13,13 @@ interface gameData {
     computerSelection: string;
     characterGame: boolean;
 }
+
+const Wrapper = styled.section`
+font-size: 1.5em;
+text-align: center;
+color: #ffffff;
+font-family: "museo", Helvetica Neue, Helvetica, sans-serif;
+`;
 export const Home: React.FunctionComponent = () => {
     const [data, error, isLoading] = useAllPeopleQuery();
     
@@ -44,6 +51,7 @@ export const Home: React.FunctionComponent = () => {
 
     const Button = styled.button`
         padding: 20px;
+        color: black;
     `
 
     const getRandomItem = (array: string[]):  gameData  => {
@@ -85,7 +93,7 @@ export const Home: React.FunctionComponent = () => {
 
 return (
     <>  
-
+        <Wrapper>
         <Button onClick={() => setTogglValue({
                 buttonTitle: "change game",
                 toggle: !toggleValue.toggle
@@ -93,12 +101,12 @@ return (
             {toggleValue.buttonTitle}
         </Button>
         <Button onClick={playGame}>Play</Button>
-            <StarWarsTopTrumpsWrapper 
+        <StarWarsTopTrumpsWrapper 
                 gameTitle={toggleValue.toggle ? "Character game" : "Ship game"}
                 characterGame={gameData?.characterGame} 
                 player1Selection={gameData.player1Selection || ""} 
                 computerSelection={gameData.computerSelection || ''} />
-      
+      </Wrapper>
     </>
 )
 

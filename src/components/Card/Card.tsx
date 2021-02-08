@@ -7,6 +7,12 @@ interface CardProps {
     secondSelection?: AllData
  }
  
+ const Heading3 = styled.h3`
+    font-size: 1.5em;
+    text-align: center;
+    color: #ffffff;
+    font-family: "museo", Helvetica Neue, Helvetica, sans-serif;
+    `;
 export const Card: React.FC<CardProps> = ({firstSelection, secondSelection}) => {
   const {
     model,
@@ -44,7 +50,7 @@ export const Card: React.FC<CardProps> = ({firstSelection, secondSelection}) => 
     
     return (
     <>
-        <h2>{title}</h2>
+        <Heading3>{title}</Heading3>
       
           <p>{parseData(height || hyperdriveRating)}</p>
           <p>{parseData(name || model)} </p>

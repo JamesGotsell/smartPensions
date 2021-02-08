@@ -61,7 +61,6 @@ export const StarWarsTopTrumpsWrapper: React.FC<WrapperProps> = ({characterGame,
 
   return (
     <div>
-      <div>StarWarsTopTrumpsWrapper</div>
       <h1>{gameTitle}</h1>
       <CardWrapper characterGame={characterGame} firstSelection={selection.firstSelection} secondSelection={selection.secondSelection} />
     </div>

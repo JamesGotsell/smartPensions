@@ -10,18 +10,19 @@ import {
     Route,
   } from "react-router-dom";
 
+  import GlobalStyle from '../../lib/global';
 
 export const App: React.FunctionComponent = () => {
     const Wrapper = styled.section`
             padding: 4em;
-            background: papayawhip;
-            height:100%;
+            background: #111111;
+            min-height: 100vh;
     `;
 
     const Title = styled.h1`
         font-size: 1.5em;
         text-align: center;
-        color: palevioletred;
+        color: #ffffff;
         font-family: "museo", Helvetica Neue, Helvetica, sans-serif;
     `;
 
@@ -29,22 +30,19 @@ export const App: React.FunctionComponent = () => {
 
 return (
     <>  
+
         <Wrapper>
-              
-                <Title>STARWARS TOP TRUMPS</Title>
+        <GlobalStyle/>
+        <Title>STARWARS TOP TRUMPS</Title>
             <Router>
-                    <Nav/>
-                        <Switch>
-                            <Route path="/results">
-                                <ResultsPage/>
-                            </Route>
-                        
-                            <Route path="/">
-                                <Home />
-                            </Route>
-                        </Switch>
+                <Nav/>
+                <Switch>
+                    <Route path="/results" component={ResultsPage} />
+                    <Route exact path="/" component={Home} />
+                </Switch>
             </Router>
         </Wrapper>
+  
     </>
 )
 

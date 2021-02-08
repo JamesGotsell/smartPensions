@@ -3,6 +3,9 @@ import { Card } from '../Card/Card'
 import { GameData, AllData } from '../types/types'
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_RESULT } from "../../graphql/queries/getResults";
+import {
+  Link
+} from "react-router-dom";
 import styled from "styled-components"
 
 interface CardWrapperProps {
@@ -11,8 +14,18 @@ interface CardWrapperProps {
   secondSelection:  AllData
 }
 
+
+const Heading = styled.h2`
+font-size: 1.5em;
+text-align: center;
+color: black;
+font-family: "museo", Helvetica Neue, Helvetica, sans-serif;
+`;
+
+
 export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSelection, secondSelection}) => {
   const [winner, setWinner] = useState("")
+  const [buttondDisplay, setButtondDisplay] = useState(true)
   let [gameCount , setGameCount] = useState(0)
   const [localResult, setLocalResult ] = useState<GameData>({
     wonBy: '',
@@ -53,6 +66,7 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
       const winner = (firstSelection.hyperdriveRating > secondSelection.hyperdriveRating) ? "player 1" : "computer"
       updateResultsObj(winner)
     }  
+    setButtondDisplay(!buttondDisplay)
   }
 
   useEffect(() =>{
@@ -70,7 +84,8 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
   return (
     <div>
         <Card firstSelection={firstSelection} secondSelection={secondSelection} />
-        <button onClick={getWinner}> <h3>whos the winner</h3></button>
+        { buttondDisplay ?  <button onClick={getWinner}> <Heading>whos the winner</Heading></button> :  <Heading><Link to="/results">Results</Link></Heading> }
+
     </div> 
   );
 };
