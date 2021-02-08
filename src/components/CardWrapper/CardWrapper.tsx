@@ -55,16 +55,8 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
     }  
   }
 
-  return (
-    <div>
-        <Card firstSelection={firstSelection} secondSelection={secondSelection} />
-               <button onClick={getWinner}> <h3>whos the winner</h3></button>
-        { winner && <p>{winner}</p>} 
-   
-        <button
-        disabled={!winner}
-        onClick={() => {
-          console.log(localResult, "local result")
+  useEffect(() =>{
+    console.log(localResult, "local result")
           addResult({
             variables: {
               wonBy: localResult.wonBy ,
@@ -72,9 +64,13 @@ export const CardWrapper: React.FC<CardWrapperProps> = ({characterGame, firstSel
               __typename: "Result"
             },
           });
-        }}
-      > add winner </button>
-   
+        
+  }, [winner])
+
+  return (
+    <div>
+        <Card firstSelection={firstSelection} secondSelection={secondSelection} />
+        <button onClick={getWinner}> <h3>whos the winner</h3></button>
     </div> 
   );
 };
