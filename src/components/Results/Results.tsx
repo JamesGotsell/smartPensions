@@ -26,7 +26,7 @@ export const Results: React.FC<ResultsProps>  = ({data,isFlipped}) => {
         return (
           <Wrapper>
             <img height={200} width={200} src='https://www.placecage.com/g/200/300' />
-            <Heading3>{data.map((item, i) => {return <p key={i}> the last game {item.wonBy != "draw" ? ` was wonBy ${item.wonBy}` : `was a draw` }</p>})}</Heading3>
+            <Heading3>{data.map((item, i) => {return <p key={i}> the last game {item.wonBy != "draw" ? ` was won By ${item.wonBy}` : `was a draw` }</p>})}</Heading3>
           </Wrapper>
         )
     }
