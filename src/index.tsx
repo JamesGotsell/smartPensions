@@ -19,7 +19,9 @@ persistCache({
 export const client = new ApolloClient({
   cache: cache,
   resolvers: resolvers,
-  uri: "http://localhost:49319",
+  // i had some issues with this endpoint - please look at the readme to steps
+  // to run the forked swapi node server
+  uri: "https://graphql.org/swapi-graphql",
 
 });
 
