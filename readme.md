@@ -6,7 +6,7 @@ Run
   npm run test
 ```
 
-# FYI
+# FYI issues
 
 - some issues with the swapi api
 - i had to get fork the graphql server and use locally
@@ -17,7 +17,7 @@ Run
   - npm start
   - take the localhost server url and had to the url section in index.ts
 
-# issus with the graphlq query not returning correct data from the so i could display more data
+issues with the graphlq query not returning correct data from the so i could display more data
 
 ```
  const [results, resultsError, isLoadingResults ] = useResultsQuery()
